@@ -1,15 +1,17 @@
 /* Trees Image - Pexels: https://www.pexels.com/photo/photo-of-trees-in-forest-3801030/ */
 @import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@0;1&display=swap');
 
 html {
   box-sizing: border-box;
 }
 
 :root {
-  --column-1: #a2622d;
-  --column-2: #1b6161;
-  --column-3: #248224;
-  --column-4: #a22d22;
+  --column-1: #00bfff;
+  --column-2: #007FFF;
+  --column-3: #00008b;
+  --column-4: #000133;
 }
 
 body {
@@ -19,7 +21,7 @@ body {
   background-position: 50% 60%;
   background-attachment: fixed;
   color: white;
-  font-family: Quicksand, sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   overflow-y: hidden;
 }
 
@@ -50,7 +52,7 @@ ul {
 
 /* Columns */
 .drag-column {
-
+  flex:1;
   margin: 0 10px;
   position: relative;
   background-color: rgba(0, 0, 0, 0.4);
