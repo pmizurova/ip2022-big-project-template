@@ -4,7 +4,7 @@ const saveItemBtns = document.querySelectorAll('.solid');
 const addItemContainers = document.querySelectorAll('.add-container');
 const addItems = document.querySelectorAll('.add-item');
 // Item Lists
-const itemLists = document.querySelectorAll('.drag-item-list');
+const columnsList = document.querySelectorAll('.drag-item-list');
 const backlogList = document.getElementById('backlog-list');
 const progressList = document.getElementById('progress-list');
 const completeList = document.getElementById('complete-list');
@@ -20,7 +20,8 @@ let completeListArray = [];
 let onHoldListArray = [];
 
 // Drag Functionality
-
+let draggedItem;
+let currentColumn;
 
 // Get Arrays from localStorage if available, set default values if not
 function getSavedColumns() {
@@ -32,10 +33,10 @@ function getSavedColumns() {
     onHoldListArray = JSON.parse(localStorage.onHoldItems);
   } // Set default values
     else {
-    backlogListArray = ['Release the course', 'Sit back and relax'];
-    progressListArray = ['Work on projects', 'Listen to music'];
-    completeListArray = ['Being cool', 'Getting stuff done'];
-    onHoldListArray = ['Being uncool'];
+    backlogListArray = ['Love yourself 💕', 'Append InfPals Sessions 💻'];
+    progressListArray = ['Work on loving yourself ❤️', 'Work on your programming skills  💻'];
+    completeListArray = ['Being cool 😎', 'Be cute 🥺'];
+    onHoldListArray = ['Being uncool 😠'];
   }
 }
 
@@ -57,6 +58,8 @@ function createItemEl(columnEl, column, item, index) {
   const listEl = document.createElement('li');
   listEl.classList.add('drag-item');
   listEl.textContent = item;
+  listEl.draggable = true;
+  listEl.setAttribute('ondragstart', 'drag(event)');
   //Append
   columnEl.appendChild(listEl);
 }
@@ -90,6 +93,34 @@ function updateDOM() {
   // Run getSavedColumns only once, Update Local Storage
 
   
+}
+
+// Function which indicates start of dragging
+function drag(e){
+  draggedItem = e.target;
+}
+
+// Function which allows functions to be droppped into columns
+function allowDrop(e){
+  e.preventDefault();
+}
+
+// Function which detects when dragged items enters col area
+function dragEnter(column){
+  columnsList[column].classList.add('over');
+  currentColumn = column;
+}
+
+// Dropping Item in a Column
+function drop(e){
+  e.preventDefault();
+  // Remove Extra padding/color change
+  columnsList.forEach((column) => {
+    column.classList.remove('over');
+  });
+  // Add item to dragged column
+  const parent = columnsList[currentColumn];
+  parent.appendChild(draggedItem);
 }
 
 // On Load
